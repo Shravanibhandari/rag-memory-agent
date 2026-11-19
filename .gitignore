@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+data/qdrant/
+data/qdrant_mem0/
+data/parents.json
+data/children.json
