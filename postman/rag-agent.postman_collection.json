@@ -1,0 +1,23 @@
+{
+  "info": {
+    "name": "Advanced RAG Memory Agent",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{"key": "base_url", "value": "http://127.0.0.1:8000"}],
+  "item": [
+    {"name": "Chat - Test 2 (query 1, set preference)", "request": {"method": "POST",
+      "header": [{"key": "Content-Type", "value": "application/json"}],
+      "url": "{{base_url}}/api/chat",
+      "body": {"mode": "raw", "raw": "{\n  \"query\": \"Hello! I work in Python and prefer brief, code-only responses.\",\n  \"user_id\": \"usr_99\",\n  \"session_id\": \"sess_1\"\n}"}}},
+    {"name": "Get user memories", "request": {"method": "GET",
+      "url": "{{base_url}}/api/users/usr_99/memories"}},
+    {"name": "Chat - Test 2 (query 2, new session)", "request": {"method": "POST",
+      "header": [{"key": "Content-Type", "value": "application/json"}],
+      "url": "{{base_url}}/api/chat",
+      "body": {"mode": "raw", "raw": "{\n  \"query\": \"Write a quick merge sort routine.\",\n  \"user_id\": \"usr_99\",\n  \"session_id\": \"sess_2\"\n}"}}},
+    {"name": "Chat - Test 1 (telemetry)", "request": {"method": "POST",
+      "header": [{"key": "Content-Type", "value": "application/json"}],
+      "url": "{{base_url}}/api/chat",
+      "body": {"mode": "raw", "raw": "{\n  \"query\": \"What is Reciprocal Rank Fusion?\",\n  \"user_id\": \"usr_01\",\n  \"session_id\": \"sess_a\"\n}"}}}
+  ]
+}
