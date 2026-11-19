@@ -1,0 +1,9 @@
+Re-ranking is a second-stage step that improves retrieval precision. A fast first stage retrieves many candidates, for example twenty documents. A cross-encoder re-ranker such as Cohere ReRank then scores each candidate against the query jointly and returns the best few, for example five.
+
+Context compression reduces the number of tokens sent to the language model. Fewer, more relevant documents lower API cost, reduce latency, and limit the noise that can distract the model. Filtering by a minimum relevance score removes weak matches even when fewer than the requested number remain.
+
+Cohere ReRank returns a relevance score between zero and one for each document. Scores near one indicate a strong match. A threshold such as 0.3 is a common starting point, tuned on real queries.
+
+Latency telemetry helps tune a pipeline. Teams usually measure retrieval time, re-ranking time, generation time, and total time per request. Re-ranking adds a network call, but it usually pays for itself by shrinking the prompt and improving answer quality.
+
+Evaluation should compare accuracy against latency. Adding a re-ranker raises quality but also adds a few hundred milliseconds, so teams benchmark both before deciding on the final configuration.

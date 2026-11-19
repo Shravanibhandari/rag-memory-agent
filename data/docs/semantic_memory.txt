@@ -1,0 +1,9 @@
+Long-term semantic memory lets an assistant remember facts about a user across sessions. Systems such as Mem0 and Zep extract facts from conversations, for example that a user works in Python or prefers brief answers, and store them as embeddings in a vector database along with metadata.
+
+At the start of a new session, the application retrieves the stored facts for the user and injects them into the system prompt. The language model then adapts its tone, format, and level of detail without the user repeating their preferences.
+
+Good memory design separates short-term conversation history from long-term facts. Session history is a rolling window of recent messages. Long-term memory is a compact list of durable facts such as preferred programming language, response style, role, and recurring projects.
+
+Memory extraction is usually performed by a language model that reads each message and emits atomic facts. Deduplication and update logic prevent contradictory or repeated entries, for instance replacing an old preferred language with a new one.
+
+Privacy matters. Applications should let users inspect and delete stored memories, which is why an endpoint that lists the facts stored for a user is a standard feature.

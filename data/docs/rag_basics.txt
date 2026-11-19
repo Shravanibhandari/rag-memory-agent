@@ -1,0 +1,9 @@
+Retrieval-Augmented Generation (RAG) combines a retrieval system with a large language model. Instead of relying only on the knowledge stored in model weights, a RAG system fetches relevant documents at query time and places them in the prompt. This reduces hallucinations and lets the model answer questions about private or recent data.
+
+A typical RAG pipeline has an ingestion stage and a query stage. During ingestion, documents are split into chunks, converted into embeddings, and stored in a vector database. During querying, the user question is embedded, similar chunks are retrieved, and the language model generates an answer grounded in those chunks.
+
+Chunk size matters. Small chunks give precise matches but lose surrounding context. Large chunks keep context but dilute the embedding and add noise. The parent-document retriever solves this by indexing small child chunks, around 200 characters, and mapping each to a larger parent chunk, around 1000 characters. When a child matches, the full parent is returned to the language model.
+
+Dense retrieval uses embedding vectors to capture semantic meaning, so a query about cars can match a passage about automobiles. Sparse retrieval such as BM25 uses exact keyword overlap and is strong for rare terms, names, and identifiers. Neither is best everywhere, so hybrid search combines both.
+
+Reciprocal Rank Fusion (RRF) merges ranked lists without needing comparable scores. Each document receives a score of one divided by k plus its rank in every list, with k commonly set to 60. Documents that appear high in several lists get the largest totals.
